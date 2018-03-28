@@ -5,7 +5,8 @@ const ObjectID = require('mongodb').ObjectID;
 
 // Connect
 const connection = (closure) => {
-    return MongoClient.connect('mongodb://localhost:27017/dev', (err, db) => {
+    return MongoClient.connect('mongodb://localhost:27017', (err, dbo) => {
+        const db = dbo.db('dev');
         if (err) {
             console.log(err)
             db.close();
@@ -41,7 +42,7 @@ router.get('/employees', (req, res) => {
                 res.join(response);
             })
             .catch((err) => {
-                sendError(err);
+                sendError(err,res);
             });
     })
 });
