@@ -14,6 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Angular CLIENT output folder
 app.use(express.static(path.join(__dirname, 'client')));
 
+// CORS on ExpressJS 
+api.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Content-Type', 'application/json');
+    next();
+});
+
 // API location
 app.use('/api', api);
 

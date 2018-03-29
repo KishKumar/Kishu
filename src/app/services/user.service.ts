@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/observable';
 import { map } from 'rxjs/operators';
 import { IUser, IUserResponse } from '../models/user';
-
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class UserService {
 
 
   // API url 
-  private API_URL: string = 'http://localhost:3000/api/user';
+  private API_URL: string = environment.webAPI + '/user';
 
 
   /**
@@ -26,7 +26,7 @@ export class UserService {
    * @returns Observable
    */
   getUser(id?: string): Observable<IUserResponse> {
-    return this._http.get<IUserResponse>(this.API_URL + id ? `/${id}` : '');
+    return this._http.get<IUserResponse>(this.API_URL + (id != undefined ? `/${id}` : ''));
   }
 
   /**
